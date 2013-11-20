@@ -25,7 +25,7 @@
 */
 
 #include "lsm303.h"
-#include "NPSerial.h"
+#include "main.h"
 
 LSM303part LSM303Version;
 uint8_t LSM303IsInitalized;

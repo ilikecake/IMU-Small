@@ -158,7 +158,11 @@ void HardwareInit( void )
 		BH_SetStatus(BH_STATUS_HW, BH_STATUS_HW_DS3232M, STATUS_HW_OK);
 	}
 	
+	
 	//DS3232M_Init();*/
+	
+	LSM303Init();
+	
 	
 	//Enable USB and interrupts
 	USB_Init();

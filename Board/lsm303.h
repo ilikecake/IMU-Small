@@ -28,7 +28,7 @@
 #ifndef _LSM303_H_
 #define _LSM303_H_
 
-#include "NPSerial.h"
+#include "main.h"
 //#include <stdint.h>
 
 /** The size of the send and recieve buffers. */

@@ -62,6 +62,7 @@
 		#include "at45db321d.h"
 		#include "datalogger.h"
 		#include "status.h"
+		#include "lsm303.h"
 		
 	/* Macros: */
 		/** LED mask for the library LED driver, to indicate that the USB interface is not ready. */

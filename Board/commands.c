@@ -44,11 +44,11 @@ const char _F2_NAME[] PROGMEM 			= "dfu";
 const char _F2_DESCRIPTION[] PROGMEM 	= "Jump to bootloader";
 const char _F2_HELPTEXT[] PROGMEM 		= "'dfu' has no parameters";
 
-//Get time from RTC
+//Get name of LSSM303
 static int _F3_Handler (void);
-const char _F3_NAME[] PROGMEM 			= "gettime";
-const char _F3_DESCRIPTION[] PROGMEM 	= "Show the current date and time";
-const char _F3_HELPTEXT[] PROGMEM 		= "'gettime' has no parameters";
+const char _F3_NAME[] PROGMEM 			= "lsm";
+const char _F3_DESCRIPTION[] PROGMEM 	= "Get name of LSM303 device.";
+const char _F3_HELPTEXT[] PROGMEM 		= "'lsm' has no parameters";
 
 //Set time on RTC
 static int _F4_Handler (void);
@@ -181,11 +181,16 @@ static int _F2_Handler (void)
 	return 0;
 }
 
-//Get time from RTC
+//Get name from LSM303
 static int _F3_Handler (void)
 {
-
-	TimeAndDate CurrentTime;
+	uint8_t lsmname;
+	
+	lsmname = LSM303PartNumber();
+	
+	printf_P(PSTR("%u\n"),lsmname);
+	
+	//TimeAndDate CurrentTime;
 	//DS3232M_GetTime(&CurrentTime);
 	/*if(DS1390GetTime(&CurrentTime) != 0)
 	{
