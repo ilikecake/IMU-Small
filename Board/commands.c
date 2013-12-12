@@ -50,11 +50,11 @@ const char _F3_NAME[] PROGMEM 			= "lsm";
 const char _F3_DESCRIPTION[] PROGMEM 	= "Get name of LSM303 device.";
 const char _F3_HELPTEXT[] PROGMEM 		= "'lsm' has no parameters";
 
-//Set time on RTC
+//GPS Functions
 static int _F4_Handler (void);
-const char _F4_NAME[] PROGMEM 			= "settime";
-const char _F4_DESCRIPTION[] PROGMEM 	= "Set the time";
-const char _F4_HELPTEXT[] PROGMEM 		= "settime <month> <day> <year> <hr> <min> <sec> <dow>";
+const char _F4_NAME[] PROGMEM 			= "GPS";
+const char _F4_DESCRIPTION[] PROGMEM 	= "GPS Functions";
+const char _F4_HELPTEXT[] PROGMEM 		= "GPS <in1> <in2>";
 
 //Read a register from the ADC
 static int _F5_Handler (void);
@@ -202,27 +202,20 @@ static int _F3_Handler (void)
 	return 0;
 }
 
-//Set time on RTC
+//GPS 
 static int _F4_Handler (void)
 {
-	TimeAndDate CurrentTime;
+	uint8_t cmd = argAsInt(1);
 	
-	/*CurrentTime.month	= argAsInt(1);
-	CurrentTime.day		= argAsInt(2);
-	CurrentTime.year	= argAsInt(3);
-	CurrentTime.hour	= argAsInt(4);
-	CurrentTime.min		= argAsInt(5);
-	CurrentTime.sec		= argAsInt(6);
-	CurrentTime.dow		= argAsInt(7);
-	
-	DS3232M_SetTime(&CurrentTime);*/
-	/*if(DS1390SetTime(&CurrentTime) != 0)
+	if(cmd == 0)
 	{
-		printf_P(PSTR("Error\n"));
-		return 0;
-	}*/
 	
-	printf_P(PSTR("Done\n"));
+	}
+	
+	if(WaitForAnyKey() == 'y')
+	{
+
+	}
 	return 0;
 }
 
@@ -529,8 +522,8 @@ static int _F11_Handler (void)
 //Scan the TWI bus for devices
 static int _F12_Handler (void)
 {
-	//InitTWI();
-	//TWIScan();
+	InitTWI();
+	TWIScan();
 	//DeinitTWI();
 	return  0;
 }

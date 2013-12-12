@@ -63,6 +63,7 @@
 		#include "datalogger.h"
 		#include "status.h"
 		#include "lsm303.h"
+		#include "GPS.h"
 		
 	/* Macros: */
 		/** LED mask for the library LED driver, to indicate that the USB interface is not ready. */
