@@ -161,6 +161,7 @@ void HardwareInit( void )
 	
 	//DS3232M_Init();*/
 	
+	GPS_Init();
 	LSM303Init();
 	
 	

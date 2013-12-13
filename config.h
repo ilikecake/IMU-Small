@@ -53,6 +53,13 @@
 #undef	TWI_USE_INTERNAL_PULLUPS				//Define this to use the internal pull-up resistors of the device.
 #define	TWI_SCL_FREQ_HZ				100000		//Set the SCL frequency
 
+//Config UART
+#define UART_USER_CONFIG
+#define UART_BAUD 9600
+#undef UART_ENABLE_LOOPBACK
+
+
+
 #endif
 
 /** @} */

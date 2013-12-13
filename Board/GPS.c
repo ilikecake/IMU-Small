@@ -28,15 +28,57 @@
 /** Returns 0 if the device initalizes correctly, 0xFF if not */
 uint8_t GPS_Init(void)
 {
+
+	//Set up PORT C pin 7 for enabling the antenna bias
+	DDRC |= (1<<6)|(1<<7);
+	GPS_SetBias(0);		//Bias is off
+	GPS_Reset(1);		//GPS is reset
+
+	//Set up UART
+	UARTinit();
 	
 	return 0x00;
 }
 
+//bias = 1 turns on the bias
+//Bias switch is active low
 void GPS_SetBias(uint8_t Bias)
 {
+	if(Bias == 1)
+	{
+		//Bias on
+		PORTC &= ~(1<<7);
+	}
+	else
+	{
+		//Bias off
+		PORTC |= (1<<7);
+	}
 	return;
 }
 
-#endif
+//ToReset = 1 to reset the GPS
+void GPS_Reset(uint8_t ToReset)
+{
+	if(ToReset == 1)
+	{
+		//Reset
+		PORTC &= ~(1<<6);
+	}
+	else
+	{
+		//Unreset
+		PORTC |= (1<<6);
+	}
+	return;
+}
+
+ISR(USART1_RX_vect)
+{
+	uint8_t c;
+	c = UDR1;			//Get char from UART recieve buffer
+	printf("%c", c);
+}
+
 
 /** @} */

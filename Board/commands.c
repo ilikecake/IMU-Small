@@ -52,7 +52,7 @@ const char _F3_HELPTEXT[] PROGMEM 		= "'lsm' has no parameters";
 
 //GPS Functions
 static int _F4_Handler (void);
-const char _F4_NAME[] PROGMEM 			= "GPS";
+const char _F4_NAME[] PROGMEM 			= "gps";
 const char _F4_DESCRIPTION[] PROGMEM 	= "GPS Functions";
 const char _F4_HELPTEXT[] PROGMEM 		= "GPS <in1> <in2>";
 
@@ -116,7 +116,7 @@ const CommandListItem AppCommandList[] PROGMEM =
 	{ _F1_NAME,		1,  2,	_F1_Handler,	_F1_DESCRIPTION,	_F1_HELPTEXT	},		//led
 	{ _F2_NAME, 	0,  0,	_F2_Handler,	_F2_DESCRIPTION,	_F2_HELPTEXT	},		//dfu
 	{ _F3_NAME, 	0,  0,	_F3_Handler,	_F3_DESCRIPTION,	_F3_HELPTEXT	},		//gettime
-	{ _F4_NAME, 	7,  7,	_F4_Handler,	_F4_DESCRIPTION,	_F4_HELPTEXT	},		//settime
+	{ _F4_NAME, 	1,  2,	_F4_Handler,	_F4_DESCRIPTION,	_F4_HELPTEXT	},		//settime
 	{ _F5_NAME, 	1,  1,	_F5_Handler,	_F5_DESCRIPTION,	_F5_HELPTEXT	},		//adread
 	{ _F6_NAME, 	2,  2,	_F6_Handler,	_F6_DESCRIPTION,	_F6_HELPTEXT	},		//adwrite	
 	{ _F7_NAME, 	0,  0,	_F7_Handler,	_F7_DESCRIPTION,	_F7_HELPTEXT	},		//tempcal
@@ -207,14 +207,35 @@ static int _F4_Handler (void)
 {
 	uint8_t cmd = argAsInt(1);
 	
-	if(cmd == 0)
+	switch(cmd)
 	{
-	
-	}
-	
-	if(WaitForAnyKey() == 'y')
-	{
-
+		case 0:
+			printf("Bias Off\n");
+			GPS_SetBias(0);
+			break;
+			
+		case 1:
+			printf("Bias On\n");
+			GPS_SetBias(1);
+			break;
+			
+		case 2:
+			printf("Reset GPS\n");
+			GPS_Reset(1);
+			break;
+			
+		case 3:
+			printf("Unreset GPS\n");
+			GPS_Reset(0);
+			break;
+			
+		case 4:
+			printf_P(PSTR("Echoing GPS data\nPress any key to stop\n-----------------------------------------\n"));
+			UARTRXINTON();
+			WaitForAnyKey();
+			UARTRXINTOFF();
+			printf_P(PSTR("\n-----------------------------------------\nStop\n"));
+			break;
 	}
 	return 0;
 }

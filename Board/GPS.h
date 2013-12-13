@@ -28,12 +28,9 @@
 
 #include "stdint.h"
 
-//Setup the CS pin
-#define GPS_BIAS_PORT	PORTB
-#define BPS_BIAS_PIN	0
-
 uint8_t GPS_Init(void);
 void GPS_SetBias(uint8_t Bias);
+void GPS_Reset(uint8_t ToReset);
 
 #endif
 /** @} */
